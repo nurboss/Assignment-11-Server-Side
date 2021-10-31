@@ -46,6 +46,7 @@ async function run(){
             res.send(result);
             console.log(result);
         })
+        
         // get my orders
         app.get('/myorder/:email', async (req, res) => {
             const email = req.params.email;
@@ -56,6 +57,13 @@ async function run(){
         // get all orders
         app.get('/allorder', async (req, res) => {
             const result = await orderCollection.find().toArray();
+            res.send(result);
+        })
+        // delete form all order
+        app.delete('/deleteaddOrdre/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id :ObjectId(id)}
+            const result = await orderCollection.deleteOne(query);
             res.send(result);
         })
         // delete order
